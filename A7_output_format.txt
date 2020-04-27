@@ -1,0 +1,46 @@
+//Invalid argument exception
+
+Place your ships:
+Enter row [1,10] and column [A,J] of destroyer: 1 A
+Vertical or horizontal? (v/h) v
+Enter row [1,10] and column [A,J] of cruiser: 1 B
+Vertical or horizontal? (v/h) h
+Enter row [1,10] and column [A,J] of submarine: 1 C 
+Vertical or horizontal? (v/h) h
+Oops, there is a ship there already!
+
+//After the placement of ships
+
+Computer:
+   ABCDEFGHIJ
+  1~~~~~~~~~~
+  2~~~~~~~~~~
+  3~~~~~~~~~~
+  4~~~~~~~~~~
+  5~~~~~~~~~~
+  6~~~~~~~~~~
+  7~~~~~~~~~~
+  8~~~~~~~~~~
+  9~~~~~~~~~~
+ 10~~~~~~~~~~
+Player:
+   ABCDEFGHIJ
+  1====~~~~~~
+  2=~~~~~~~~~
+  3~~~~~~~~~~
+  4~~~~~~~~~~
+  5~~~===~~~~
+  6~~~===~~~~
+  7~~~===~~~~
+  8~~~~==~~~~
+  9~~~~~=~~~~
+ 10~~~~~~~~~~
+
+// Out of range exception
+
+Take a shot: Enter row [1,10] and column [A,J]: 11 A
+Oops, shot is out-of-bounds.
+Take a shot: Enter row [1,10] and column [A,J]: 1 A
+(1,A) is a miss.
+Computer is shooting... (4,J) is a miss.
+
