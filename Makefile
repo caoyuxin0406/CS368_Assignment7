@@ -6,11 +6,11 @@ CXX=g++
 CXXFLAGS = -Wall
 EXE = Battleship
 
-# all: battleship.o
-# 	$(CXX) $(CXXFLAGS) -o $(EXE) battleship.o
+all: battleship.o
+	$(CXX) $(CXXFLAGS) -o $(EXE) battleship.o
 
-# demo.o: demo.cpp Graph.h UnionFind.h SetUF.h
-# 	$(CXX) $(CXXFLAGS) -c demo.cpp
+battleship.o: BattleShip.cpp BattleShip.h Point.h Ship.h Board.h
+	$(CXX) $(CXXFLAGS) -c BattleShip.cpp
 
 clean:
 	-del battleship.o

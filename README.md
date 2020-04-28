@@ -1,4 +1,4 @@
-# Author: Ethan Lengfeld , elengfeld@wisc.edu , 9074030836
+# Author: Ethan Lengfeld , elengfeld@wisc.edu , 9074020836
 # CS368_Assignment6
 Assignment 7 for CS 368: Learn a Programming Language C++
 
