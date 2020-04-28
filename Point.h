@@ -14,8 +14,8 @@
 //
 ////////////////////////////////////////////////////////////////////////////////
 
-#ifndef POINT
-#define POINT
+#ifndef POINT_H
+#define POINT_H
 
 #include <iostream>
 
@@ -83,17 +83,18 @@ Point<xDim,yDim>::Point(char alpha, unsigned y) {
     if(y < 0 || y > 9) {
         throw std::out_of_range("out of range!");
     }
+    this->status = EMPTY;
 }
 
 template<unsigned xDim, unsigned yDim>
 Point<xDim,yDim>::Point(unsigned x, unsigned y) {
-    // TODO is this even right!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
     if(x < 0 || x > 9) {
         throw std::out_of_range("out of range!");
     }
     if(y < 0 || y > 9) {
         throw std::out_of_range("out of range!");
     }
+    this->status = EMPTY;
 }
 
 

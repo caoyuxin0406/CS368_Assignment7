@@ -13,8 +13,8 @@
 //
 ////////////////////////////////////////////////////////////////////////////////
 
-#ifndef SHIP
-#define SHIP
+#ifndef SHIP_H
+#define SHIP_H
 
 #include "Point.h"
 #include <vector>
@@ -50,8 +50,16 @@ class Ship {
 };
 
 template<unsigned xDim, unsigned yDim>
-Ship<xDim,yDim>::Ship(std::string name, const Point<xDim, yDim> &coord, unsigned len, Direction direction, Board<xDim, yDim> &board){
-    
+Ship<xDim,yDim>::Ship(std::string name, const std::vector<Point<xDim,yDim>*> shipCoords) :
+name(name),
+ship(shipCoords)
+{}
+
+// TODO
+template<unsigned xDim, unsigned yDim>
+Ship<xDim,yDim>::Ship(std::string name, const Point<xDim, yDim> &coord, unsigned len, Direction direction, Board<xDim, yDim> &board) {
+    this->name = name;
+
 }
 
 template<unsigned xDim, unsigned yDim>
