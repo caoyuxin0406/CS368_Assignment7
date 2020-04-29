@@ -9,7 +9,7 @@
 // CS Login:         lengfeld
 //
 //
-// Online sources:   
+// Online sources:   https://en.cppreference.com/w/cpp/language/explicit
 //
 ////////////////////////////////////////////////////////////////////////////////
 
@@ -46,7 +46,7 @@ class Board {
                     os << "*";
                 } 
                 else if(board.board[row][b_col].getStatus() == MISS) {
-                    os << "X";
+                    os << "x";
                 }
                 else if(board.board[row][b_col].getStatus() == SHIP && !(board.hideShips)) {
                     os << "=";
@@ -54,7 +54,6 @@ class Board {
                 else {
                     os << "~";
                 }
-
             }
             os << std::endl;
         }
@@ -71,16 +70,17 @@ class Board {
     public:
 
         explicit Board(bool hide=true) {
+            this->hideShips = hide;
             for(unsigned x = 0; x < xDim; x++) {
                 for(unsigned y = 0; y < yDim; y++) {
-                    this->board[x][y] = Point<xDim,yDim>(x,y);
+                    this->board[x][y] = Point<xDim,yDim>(y,x);
                 }
             }
         }
 
         void setStatus(const Point <xDim,yDim> point, Status status);
 
-        Point<xDim, yDim>* getShipPoint(const Point<xDim, yDim> &p, unsigned X, unsigned Y);
+        Point<xDim, yDim>* getShipPoint(const Point<xDim, yDim> &point, unsigned X, unsigned Y);
 };
 
 
@@ -90,8 +90,25 @@ void Board<xDim,yDim>::setStatus(const Point <xDim,yDim> point, Status status) {
 }
 
 template<unsigned xDim, unsigned yDim>
-Point<xDim, yDim>* Board<xDim,yDim>::getShipPoint(const Point<xDim, yDim> &p, unsigned X, unsigned Y) {
+Point<xDim, yDim>* Board<xDim,yDim>::getShipPoint(const Point<xDim, yDim> &point, unsigned X, unsigned Y) {
 
+// std::cout << "point.x = " << point.x << " and X = "<< X << "       xDim = " << xDim << std::endl;
+// std::cout << "point.y = " << point.y << " and Y = "<< Y << "       yDim = " << yDim << std::endl;
+    if(point.x+X > xDim || point.y > yDim) {
+        // std::cout << "outside range" << std::endl;
+        throw std::invalid_argument("Point outside range");
+    }
+
+    Point<xDim,yDim> *pointToCheck = &this->board[point.y+Y][point.x+X];
+
+    if(pointToCheck->getStatus() == SHIP) {
+        // std::cout << "it's a ship" << std::endl;
+        throw std::invalid_argument("Point already occupied");
+    }
+
+    this->setStatus(*pointToCheck, SHIP);
+
+    return pointToCheck;
 }
 
 #endif

@@ -80,9 +80,11 @@ Point<xDim,yDim>::Point(char alpha, unsigned y) {
     if(xVal < 0 || xVal > 9) {
         throw std::out_of_range("out of range!");
     }
+    this->x = xVal;
     if(y < 0 || y > 9) {
         throw std::out_of_range("out of range!");
     }
+    this->y = y;
     this->status = EMPTY;
 }
 
@@ -91,9 +93,11 @@ Point<xDim,yDim>::Point(unsigned x, unsigned y) {
     if(x < 0 || x > 9) {
         throw std::out_of_range("out of range!");
     }
+    this->x = x;
     if(y < 0 || y > 9) {
         throw std::out_of_range("out of range!");
     }
+    this->y = y;
     this->status = EMPTY;
 }
 
