@@ -14,7 +14,9 @@
 ////////////////////////////////////////////////////////////////////////////////
 
 /**
- * 
+ * Store all data relevant to the Battleship
+ * board. Board uses Point data structure for
+ * each point on Battleship Board.
 */
 #ifndef BOARD_H
 #define BOARD_H
