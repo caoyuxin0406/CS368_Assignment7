@@ -14,7 +14,7 @@
 ////////////////////////////////////////////////////////////////////////////////
 
 /**
- * 
+ * Header file for running Battleship game.
 */
 #ifndef BATTLESHIP_MAIN_H
 #define BATTLESHIP_MAIN_H
