@@ -1,3 +1,22 @@
+////////////////////////////////////////////////////////////////////////////////
+// Main File: BattleShip.cpp
+// This File: BattleShip.h
+// Other Files: 	 Board.h / Ship.h / Point.h / BattleShip.cpp / BattleShip.h / README.md / Makefile
+// Semester:         CS 368 Spring 2020
+//
+// Author:           Ethan Lengfeld (Comments Only)
+// Email:            elengfeld@wisc.edu
+// CS Login:         lengfeld
+//
+//
+// Online sources:   
+//
+////////////////////////////////////////////////////////////////////////////////
+
+/**
+ * Run the game of Battleship. Run as
+ * Computer vs. Player
+*/
 #include "BattleShip.h"
 
 #include <stdexcept>
@@ -26,6 +45,9 @@ void initGame()
   computer.empty();
 }
 
+/**
+ * Place ships for Battleship
+*/
 void placeShips(default_random_engine &rand)
 {
   uniform_int_distribution<unsigned> randX(0,MAX_X-1);

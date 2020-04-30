@@ -1,7 +1,7 @@
 ////////////////////////////////////////////////////////////////////////////////
-// Main File: Battleship.cpp
+// Main File: BattleShip.cpp
 // This File: Ship.h
-// Other Files: 	 Board.h / Ship.h / Point.h / BattleShip.cpp / BattleShip.h / README.md / Makefile.
+// Other Files: 	 Board.h / Ship.h / Point.h / BattleShip.cpp / BattleShip.h / README.md / Makefile
 // Semester:         CS 368 Spring 2020
 //
 // Author:           Ethan Lengfeld
@@ -14,12 +14,19 @@
 //
 ////////////////////////////////////////////////////////////////////////////////
 
+/**
+ * Hold all data related to the Ship 
+ * that is placed the Battleship board
+*/
 #ifndef SHIP_H
 #define SHIP_H
 
 #include "Point.h"
 #include <vector>
 
+/**
+ * Enum to determine which 
+*/
 enum Direction {
     VERTICAL,
     HORIZONTAL
@@ -30,39 +37,60 @@ class Ship {
 
     private:
 
+        // store the name of the ship
         std::string name;
 
+        // store the Points that make up the Ship
         std::vector<Point<xDim, yDim>*> ship;
 
     public:
 
+        /**
+         * Constuctor to set name of ship and the Points 
+         * already established in a Ship vector
+        */
         Ship(std::string name, const std::vector<Point<xDim, yDim>*> shipCoords);
 
+        /**
+         * Constructor to set name of ship as well as place new ship
+         * on the board. It will test each Point of the new ship. Points
+         * are placed based on parament len(length) and Direction
+        */
         Ship(std::string name, const Point<xDim, yDim> &coord, unsigned len, Direction direction, Board<xDim, yDim> &board);
 
+        /**
+         * Set the name of the Ship
+        */
         void setName(std::string name);
 
+        /**
+         * Return name of the Ship
+        */
         std::string getName();
 
+        /**
+         * Determine if point on ship has been hit.
+        */
         bool isHit(const Point<xDim, yDim> &target) const;
 
+        /**
+         * Determine if Ship has been sunk. That is
+         * all Points in ship have status of HIT
+        */
         bool isSunk() const;
 
 };
 
 template<unsigned xDim, unsigned yDim>
 Ship<xDim,yDim>::Ship(std::string name, const std::vector<Point<xDim,yDim>*> shipCoords) :
-name(name),
-ship(shipCoords)
+    name(name),
+    ship(shipCoords)
 {}
 
-// TODO
 template<unsigned xDim, unsigned yDim>
 Ship<xDim,yDim>::Ship(std::string name, const Point<xDim, yDim> &coord, unsigned len, Direction direction, Board<xDim, yDim> &board) {
-    this->name = name;
 
-// std::cout << "coord.x = " << coord.x <<  "       xDim = " << xDim << std::endl;
-// std::cout << "coord.y = " << coord.y <<  "       yDim = " << yDim << std::endl;
+    this->name = name;
 
     std::vector<Point<xDim, yDim>*> newShip;
     try {
@@ -76,7 +104,6 @@ Ship<xDim,yDim>::Ship(std::string name, const Point<xDim, yDim> &coord, unsigned
             newShip.push_back(newPoint);
         }
     } catch (std::invalid_argument &error) {
-        // std::cout << "here" << std::endl;
         for(Point<xDim,yDim> *currPoint : newShip) {
             currPoint->status = EMPTY;
         }

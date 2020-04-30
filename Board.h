@@ -1,7 +1,7 @@
 ////////////////////////////////////////////////////////////////////////////////
 // Main File: Battleship.cpp
 // This File: Board.h
-// Other Files: 	 Board.h / Ship.h / Point.h / BattleShip.cpp / BattleShip.h / README.md / Makefile.
+// Other Files: 	 Board.h / Ship.h / Point.h / BattleShip.cpp / BattleShip.h / README.md / Makefile
 // Semester:         CS 368 Spring 2020
 //
 // Author:           Ethan Lengfeld
@@ -13,6 +13,9 @@
 //
 ////////////////////////////////////////////////////////////////////////////////
 
+/**
+ * 
+*/
 #ifndef BOARD_H
 #define BOARD_H
 
@@ -21,6 +24,9 @@
 template<unsigned xDim = 10, unsigned yDim = 10>
 class Board {
 
+    /**
+     * Overloaded << operator to print the Battleship board
+    */
     friend std::ostream& operator<<(std::ostream &os, const Board<xDim,yDim> &board) {
         int xLen = static_cast<int>(xDim);
         int yLen = static_cast<int>(yDim);
@@ -57,18 +63,22 @@ class Board {
             }
             os << std::endl;
         }
-
         return os;
     }
 
     private:
 
+        // store all Points that make up the battleship board
         Point<xDim, yDim> board[xDim][yDim];
 
+        // boolean to determine whether ships should be hidden on board
         bool hideShips;
 
     public:
 
+        /**
+         * Explicit constructor to create board of Points
+        */
         explicit Board(bool hide=true) {
             this->hideShips = hide;
             for(unsigned x = 0; x < xDim; x++) {
@@ -78,8 +88,14 @@ class Board {
             }
         }
 
+        /**
+         * Set the status of the Point
+        */
         void setStatus(const Point <xDim,yDim> point, Status status);
 
+        /**
+         * Determine if Point from offset is valid for new Ship placement
+        */
         Point<xDim, yDim>* getShipPoint(const Point<xDim, yDim> &point, unsigned X, unsigned Y);
 };
 
@@ -92,17 +108,13 @@ void Board<xDim,yDim>::setStatus(const Point <xDim,yDim> point, Status status) {
 template<unsigned xDim, unsigned yDim>
 Point<xDim, yDim>* Board<xDim,yDim>::getShipPoint(const Point<xDim, yDim> &point, unsigned X, unsigned Y) {
 
-// std::cout << "point.x = " << point.x << " and X = "<< X << "       xDim = " << xDim << std::endl;
-// std::cout << "point.y = " << point.y << " and Y = "<< Y << "       yDim = " << yDim << std::endl;
     if(point.x+X > xDim || point.y > yDim) {
-        // std::cout << "outside range" << std::endl;
         throw std::invalid_argument("Point outside range");
     }
 
     Point<xDim,yDim> *pointToCheck = &this->board[point.y+Y][point.x+X];
 
     if(pointToCheck->getStatus() == SHIP) {
-        // std::cout << "it's a ship" << std::endl;
         throw std::invalid_argument("Point already occupied");
     }
 

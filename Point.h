@@ -1,7 +1,7 @@
 ////////////////////////////////////////////////////////////////////////////////
-// Main File: Battleship.cpp
+// Main File: BattleShip.cpp
 // This File: Point.h
-// Other Files: 	 Board.h / Ship.h / Point.h / BattleShip.cpp / BattleShip.h / README.md / Makefile.
+// Other Files: 	 Board.h / Ship.h / Point.h / BattleShip.cpp / BattleShip.h / README.md / Makefile
 // Semester:         CS 368 Spring 2020
 //
 // Author:           Ethan Lengfeld
@@ -14,14 +14,30 @@
 //
 ////////////////////////////////////////////////////////////////////////////////
 
+/**
+ * This class will act as the main data
+ * structure for the BattleShip program.
+ * Keep track of a points x,y coordinates
+ * as well as the status of the point.
+*/
 #ifndef POINT_H
 #define POINT_H
 
 #include <iostream>
 
+// forward declaration of Ship and Board classes
 template<unsigned xDim, unsigned yDim> class Ship;
 template<unsigned xDim, unsigned yDim> class Board;
 
+/**
+ * Each point will have a status member
+ * to keep track of it's current status
+ * EMPTY - point has not been targeted or 
+ *         ship has not been places
+ * SHIP - point has part of ship placed
+ * MISS - point was targeted and there was no ship
+ * HIT - point was targeted and there was a ship
+*/
 enum Status {
     EMPTY,
     SHIP,
@@ -31,12 +47,18 @@ enum Status {
 
 template<unsigned xDim = 10, unsigned yDim = 10>
 class Point {
-    
+
+    /**
+     * overloaded << operator to print out coordinates of Point
+    */
     friend std::ostream& operator<<(std::ostream &os, const Point<xDim,yDim> &point) {
         os << "(" << (point.y+1) << "," << point.xToChar(point.x) << ")";
         return os;
     }
 
+    /**
+     * overloaded == operator to determine if two Points are equal
+    */
     friend bool operator==(const Point<xDim,yDim> &lhs, const Point<xDim,yDim> &rhs) {
         if(lhs.x == rhs.x && lhs.y == rhs.y) {
             return true;
@@ -44,32 +66,53 @@ class Point {
         return false;
     }
 
-
+    // Ship is friend so it can utilize members
     friend class Ship<xDim, yDim>;
 
+    // Board is friend so it can utilize members
     friend class Board<xDim, yDim>;
 
     private:
 
+        // keep track of x coordinate converted to (A-...)
         unsigned x;
 
+        // keep track of y coordinate 
         unsigned y;
 
+        // store status of Point (EMPTY,SHIP,MISS,HIT)
         Status status;
 
     public:
 
         Point() = default;
 
+        /**
+         * Constructor for Point that takes in char alpha
+         * and unsigned y arguments
+        */
         Point(char alpha, unsigned y);
 
+        /**
+         * Constructor for Point that takes in unsigned x
+         * and unsigned y arguments
+        */
         Point(unsigned x, unsigned y);
 
 
+        /**
+         * Convert unsigned x to a char
+        */
         static char xToChar(unsigned x);
 
+        /**
+         * Convert to char to unsigned value
+        */
         static unsigned xToInt(char alpha);
 
+        /**
+         * Get status of Point
+        */
         Status getStatus() const;
 
 };

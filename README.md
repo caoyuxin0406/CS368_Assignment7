@@ -1,5 +1,5 @@
 # Author: Ethan Lengfeld , elengfeld@wisc.edu , 9074020836
-# CS368_Assignment6
+
 Assignment 7 for CS 368: Learn a Programming Language C++
 
 # Assignment 7: Battleship
@@ -15,4 +15,14 @@ To remove executable and any .o files run the command 'make clean'
 Warning! This will delete the executable and will require rerunning 'make' to retest it
 
 ## Code Organization
-TODO
+Battleship.cpp defines the main functionality for
+playing Battlship game.
+Point.h will define points on the Battleship game 
+board. Point.h is primary data structure for the 
+Ship.h and Board.h files.
+Ship.h will hold coordinates stored as Point
+which will be used to determine wether a Ship 
+has been Hit, Sunk, or wether it missed.
+Board.h will keep track of Ships on the board
+and update the board based on whether shots
+hit a ship or miss a ship.
